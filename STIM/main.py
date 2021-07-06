@@ -6,6 +6,7 @@ from agent_RL import *
 from summary import * 
 from agent_Temporal import *
 
+
 tf.reset_default_graph()
 
 if constants.STRATEGY == constants.NSTEP_QL:

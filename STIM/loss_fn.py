@@ -1,7 +1,9 @@
 import tensorflow as tf
+tf = tf.compat.v1
+tf.disable_v2_behavior()
 import scipy as sp
-import tensorflow.contrib.slim as slim
-import tensorflow.contrib.layers as layer
+# import tensorflow.contrib.slim as slim
+# import tensorflow.contrib.layers as layer
 import tensorflow.keras.backend as K
 import time, random, threading
 import numpy as np
@@ -32,7 +34,7 @@ def bce(y_true, y_pred):
 
 #------------------------------------------------------------------------------
 def bce_smooth(y_true, y_pred):
-	return tf.contrib.losses.sigmoid_cross_entropy(logits=y_pred, multi_class_labels=y_true, label_smoothing=constants.SMOOTH_FACTOR)
+	return tf.losses.sigmoid_cross_entropy(logits=y_pred, multi_class_labels=y_true, label_smoothing=constants.SMOOTH_FACTOR)
 
 #------------------------------------------------------------------------------
 def binary_focal_loss_sigmoid(y_true, y_pred):

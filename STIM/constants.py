@@ -3,12 +3,12 @@ import numpy as np
 SUMMARY_FODLER	= 'Summary/'
 MODEL_FOLDER	= 'model/'
 TRAIN_FOLDER	= 'Train/'
-#TEST_FOLDER		= 'Test/'
-TEST_FOLDER		= 'Test_large/'
+TEST_FOLDER		= 'Test/'
+# TEST_FOLDER		= 'Test_large/'
 
 GPU_ID			= 0
 
-INSTANCE_NUM	= 0
+INSTANCE_NUM	= 1
 
 RANDOM			= 0
 LEAST_CONNECT	= 1
@@ -47,7 +47,7 @@ STRATEGY 		= NSTEP_QL
 TRAIN 			= 0
 TEST			= 1
 REAL_NET		= 2
-MODE			= TEST
+MODE			= TRAIN
 
 if MODE == REAL_NET:
 	START_NODE_STG = LEAST_CONNECT
@@ -68,9 +68,9 @@ INFLUENCE			= 7
 INFLUENCE_NORM		= 8
 REWARD_TYPE 		= INFLUENCE_NORM
 
-DIFUSION_WEIGHT		= 2.0
-COUNT_WEIGHT		= 1.0
-DEGREE_WEIGHT		= 1.0
+DIFUSION_WEIGHT		= 1.0
+COUNT_WEIGHT		= 0.5
+DEGREE_WEIGHT		= 0.0
 
 USE_LSTM		= True
 NODE_RANK		= False
@@ -88,7 +88,7 @@ VMAX			= 1.0
 DELTA_Z 		= (VMAX - VMIN) / float(N_ATOM - 1)
 ATOMS 			= [VMIN + i * DELTA_Z for i in range(N_ATOM)]
 #ATOMS 			= np.arange(VMIN, VMAX + DELTA_Z/2, DELTA_Z)
-NUM_FEATURES 	= 2
+NUM_FEATURES 	= 4
 EMBED_SIZE		= 128
 LSTM_SIZE_F1	= 64
 LSTM_SIZE_F2	= 128
@@ -97,7 +97,7 @@ MIN_LEARNING_RT	= 1e-6
 #LEARNING_RATE	= 1e-4
 #MIN_LEARNING_RT	= 5e-5
 LR_DECAY 		= 0.999
-GAMMA			= 0.9
+GAMMA			= 0.7
 
 TIME_LIMIT		= 8
 USE_CLASS		= True
@@ -182,13 +182,13 @@ if USE_DOUBLE_FLOW:
 if not USE_LSTM:
 	FLOW_EXTRA = '_SEQ'
 
-METHOD_NAME = 'GCN'
+METHOD_NAME = 'S2VEC_NORM'
 if EMBED_METHOD == S2VEC:
 	METHOD_NAME = 'S2VEC'
 elif EMBED_METHOD == S2VEC_NORM:
 	METHOD_NAME = 'S2VEC_NORM'
 
-FOLDER 			= '../Graph_Generator/'
+FOLDER 			= '../Graphs/'
 SUMMARY_NAME	= 	METHOD_NAME + '_' + Q_NAME + '_VAR_' + LAYER_NAME + '_' + TRAIN_NAME + \
 					'_NORM=' + str(USE_NORMALIZE) + '_F=' + str(NUM_FEATURES) + '_M=' + \
 					str(MAX_TO_KEEP) + '_Batch=' + str(BATCH_SIZE) + '_R=' + \

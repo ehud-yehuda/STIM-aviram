@@ -4,6 +4,9 @@ from graph import *
 import copy 
 import math
 import time
+# import tensorflow as tf
+# tf = tf.compat.v1
+# tf.disable_v2_behavior()
 
 class NStep_QL_agent(Agent):
 

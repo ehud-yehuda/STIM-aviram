@@ -21,13 +21,13 @@ TEST_FLD = 'Test/'
 """
 Variables that control how the graphs are generated
 """
-NUM_TRAIN_GRAPH		= 500
-NUM_TEST_GRAPH		= 50
+NUM_TRAIN_GRAPH		= 1
+NUM_TEST_GRAPH		= 1
 
 GRAPH_TYPE 			= SCALEFREE
 
-MAX_NODES			= 5000
-MIN_NODES			= 500
+MAX_NODES			= 20
+MIN_NODES			= 2
 
 MAX_P				= 0.1	
 MIN_P 				= 0.05

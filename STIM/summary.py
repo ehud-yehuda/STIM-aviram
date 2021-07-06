@@ -1,5 +1,7 @@
 import numpy as np
 import tensorflow as tf
+tf = tf.compat.v1
+tf.disable_v2_behavior()
 import constants
 import os
 from sklearn.metrics import roc_curve, auc, roc_auc_score, confusion_matrix, precision_recall_fscore_support

@@ -1,9 +1,11 @@
 import numpy as np
 import tensorflow as tf
+tf = tf.compat.v1
+tf.disable_v2_behavior()
 import scipy as sp
 import time, random, threading
-import tensorflow.contrib.slim as slim
-import tensorflow.contrib.layers as layer
+# import tensorflow.contrib.slim as slim
+# import tensorflow.contrib.layers as layer
 #import keras.backend as K
 from tensorflow.keras.layers import *
 import multiprocessing
@@ -143,9 +145,11 @@ class Neural_Net():
 		with tf.variable_scope(self.scope, reuse=tf.AUTO_REUSE), tf.device(self.device): 
 			#initializer = normalized_columns_initializer(constants.INIT_WEIGHT)
 			#initializer = tf.constant_initializer(constants.INIT_WEIGHT)
-			initializer = tf.contrib.layers.xavier_initializer()
+			# initializer = tf.contrib.layers.xavier_initializer()
+			initializer = tf.keras.initializers.glorot_normal()
 			#init_bias = tf.zeros_initializer
-			init_bias = tf.contrib.layers.xavier_initializer()
+			# init_bias = tf.contrib.layers.xavier_initializer()
+			init_bias = tf.keras.initializers.glorot_normal()
 
 			self.node_features = tf.placeholder(tf.float32, [None, None, self.n_feat], name="features")
 			self.A = tf.sparse_placeholder(tf.float32, name="A")
@@ -194,9 +198,11 @@ class Neural_Net():
 		with tf.variable_scope(self.scope, reuse=tf.AUTO_REUSE), tf.device(self.device): 
 			#initializer = normalized_columns_initializer(constants.INIT_WEIGHT)
 			#initializer = tf.constant_initializer(constants.INIT_WEIGHT)
-			initializer = tf.contrib.layers.xavier_initializer()
+			# initializer = tf.keras.xavier_initializer()
+			initializer = tf.keras.initializers.glorot_normal()
 			#init_bias = tf.zeros_initializer
-			init_bias = tf.contrib.layers.xavier_initializer()
+			init_bias = tf.keras.initializers.glorot_normal()
+			# init_bias = tf.keras.xavier_initializer()
 
 			self.node_features = tf.placeholder(tf.float32, [None, None, self.n_feat], name="features")
 			self.A = tf.sparse_placeholder(tf.float32, name="A")
@@ -236,8 +242,10 @@ class Neural_Net():
 		#with tf.variable_scope(self.scope), tf.device(self.device):
 		with tf.variable_scope(self.scope, reuse=tf.AUTO_REUSE), tf.device(self.device): 
 
-			lstm_cell = tf.contrib.rnn.BasicLSTMCell(units, state_is_tuple=True)
-			lstm_state_in = tf.contrib.rnn.LSTMStateTuple(c_in, h_in)
+			# lstm_cell = tf.contrib.rnn.BasicLSTMCell(units, state_is_tuple=True)
+			lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(units, state_is_tuple=True)
+			# lstm_state_in = tf.contrib.rnn.LSTMStateTuple(c_in, h_in)
+			lstm_state_in = tf.nn.rnn_cell.LSTMStateTuple(c_in, h_in)
 			lstm_out_full, lstm_state_out = tf.nn.dynamic_rnn(	lstm_cell, lstm_input, initial_state=lstm_state_in,
 																sequence_length=None, time_major=False, scope=name)
 
@@ -296,7 +304,8 @@ class Neural_Net():
 			new_size = constants.LSTM_SIZE_F1 + constants.LSTM_SIZE_F2
 			lstm_embed_out = tf.concat([self.lstm_embed_f1, self.lstm_embed_f2], axis=2)
 
-		initializer = tf.contrib.layers.xavier_initializer()
+		# initializer = tf.contrib.layers.xavier_initializer()
+		initializer = tf.keras.initializers.glorot_normal()
 		self.w3 = tf.Variable(initializer((new_size, constants.EMBED_SIZE)), trainable=True, dtype=tf.float32, name="w3")
 		self.w4 = tf.Variable(initializer((constants.EMBED_SIZE, constants.EMBED_SIZE)), trainable=True, dtype=tf.float32, name="w4")
 
@@ -325,10 +334,11 @@ class Neural_Net():
 		with tf.variable_scope(self.scope, reuse=tf.AUTO_REUSE), tf.device(self.device):
 			#initializer = normalized_columns_initializer(constants.INIT_WEIGHT)
 			#initializer = tf.constant_initializer(constants.INIT_WEIGHT)
-			initializer = tf.contrib.layers.xavier_initializer()
+			# initializer = tf.contrib.layers.xavier_initializer()
+			initializer = tf.keras.initializers.glorot_normal()
 			#init_bias = tf.constant_initializer(constants.INIT_WEIGHT)
 			#init_bias = normalized_columns_initializer(constants.INIT_WEIGHT)
-			init_bias = tf.contrib.layers.xavier_initializer()
+			init_bias = tf.keras.initializers.glorot_normal()
 			#init_bias = tf.zeros_initializer
 			#init_bias = None
 

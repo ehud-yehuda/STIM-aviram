@@ -21,8 +21,8 @@ TEST_FLD = 'Test/'
 """
 Variables that control how the graphs are generated
 """
-NUM_TRAIN_GRAPH		= 1
-NUM_TEST_GRAPH		= 1
+NUM_TRAIN_GRAPH		= 5
+NUM_TEST_GRAPH		= 3
 
 GRAPH_TYPE 			= SCALEFREE
 

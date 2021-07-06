@@ -146,8 +146,9 @@ if constants.STRATEGY == constants.NSTEP_QL:
 			print ("Loading....")
 			if not os.path.exists(constants.MODEL_PATH):
 				os.mkdir(constants.MODEL_PATH)
-			c = tf.train.get_checkpoint_state(constants.MODEL_PATH)
-			saver.restore(session,c.model_checkpoint_path)
+			c = tf.train.latest_checkpoint(constants.MODEL_PATH)
+			saver.restore(session, c.model_checkpoint_path)
+			# saver.recover_last_checkpoints(c.model_checkpoint_path)
 			print ("Graph loaded!")
 		else:
 			session.run(tf.global_variables_initializer())

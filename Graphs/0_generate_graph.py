@@ -21,8 +21,8 @@ TEST_FLD = 'Test/'
 """
 Variables that control how the graphs are generated
 """
-NUM_TRAIN_GRAPH		= 500
-NUM_TEST_GRAPH		= 50
+NUM_TRAIN_GRAPH		= 10
+NUM_TEST_GRAPH		= 2
 
 GRAPH_TYPE 			= SCALEFREE
 
@@ -109,23 +109,22 @@ class Graph_Generator():
 
 
 
+if __name__ == '__main__':
 
+	workers = []
+	for i in range(num_workers):
+		print (i)
+		workers.append(Graph_Generator(i, num_workers))
 
+	"""
+	Initializes the worker threads
+	"""
+	worker_threads = []
+	for i in range(num_workers):
+		t = multiprocessing.Process(target=workers[i].run_graph_generator, args=(i,))
+		t.start()
+		sleep(1)
+		worker_threads.append(t)
 
-workers = []
-for i in range(num_workers):
-	print (i)
-	workers.append(Graph_Generator(i, num_workers))
-
-"""
-Initializes the worker threads
-"""
-worker_threads = []
-for i in range(num_workers):
-	t = multiprocessing.Process(target=workers[i].run_graph_generator, args=(i,))
-	t.start()
-	sleep(1)
-	worker_threads.append(t)
-
-for i in range(num_workers):
-	worker_threads[i].join()
+	for i in range(num_workers):
+		worker_threads[i].join()

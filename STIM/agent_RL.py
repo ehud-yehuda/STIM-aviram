@@ -701,7 +701,7 @@ class NStep_QL_agent(Agent):
 							loss_rl, loss_sup, ytrue_vec, ypred_vec = self._update_loss_list(loss_rl, loss_sup, ytrue_vec, ypred_vec, lrl, lsup, y_true, y_pred)
 							self.session.run(self.update_local_net)
 							n_steps = self.session.run(self.increse_n_steps)
-							self._save_model(saver, n_steps)
+							# self._save_model(saver, n_steps)
 							if constants.MODEL_TO_TRAIN == constants.RL_MODEL or constants.MODEL_TO_TRAIN == constants.ALL_MODEL:
 								if constants.USE_EXP:
 									batch_copy = copy.deepcopy(batch)
